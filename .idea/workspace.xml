@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="108f447d-61ec-423a-afb9-8f2f497fa09f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/CONTRIBUTING.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App.tsx" afterPath="$PROJECT_DIR$/src/components/App.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/GitHubCorner.tsx" afterPath="$PROJECT_DIR$/src/components/GitHubCorner.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LayerUI.tsx" afterPath="$PROJECT_DIR$/src/components/LayerUI.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ShortcutsDialog.tsx" afterPath="$PROJECT_DIR$/src/components/ShortcutsDialog.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TopErrorBoundary.tsx" afterPath="$PROJECT_DIR$/src/components/TopErrorBoundary.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/excalidraw-embed/package.json" afterPath="$PROJECT_DIR$/src/excalidraw-embed/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/locales/README.md" afterPath="$PROJECT_DIR$/src/locales/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tests/binding.test.tsx" afterPath="$PROJECT_DIR$/src/tests/binding.test.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils.ts" afterPath="$PROJECT_DIR$/src/utils.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -104,8 +94,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="75">
-                <caret line="5" column="16" lean-forward="false" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+              <first_editor relative-caret-position="90">
+                <caret line="6" column="51" lean-forward="false" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -317,12 +307,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603274939485</updated>
-      <workItem from="1603274941954" duration="2271000" />
+      <workItem from="1603274941954" duration="2357000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2271000" />
+    <option name="totallyTimeSpent" value="2357000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1337" extended-state="6" />
@@ -532,8 +522,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="75">
-            <caret line="5" column="16" lean-forward="false" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+          <first_editor relative-caret-position="90">
+            <caret line="6" column="51" lean-forward="false" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
             <folding />
           </first_editor>
           <second_editor />
