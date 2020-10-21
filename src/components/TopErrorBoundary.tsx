@@ -67,7 +67,7 @@ export class TopErrorBoundary extends React.Component<
     }
 
     window.open(
-      `https://github.com/AnushkaKRajasingha/demo-conceptboard?body=${body}`,
+      `https://github.com/AnushkaKRajasingha/demo-conceptboard/issues/new?body=${body}`,
     );
   }
 

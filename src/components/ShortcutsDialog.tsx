@@ -104,7 +104,7 @@ const Footer = () => (
       {t("shortcutsDialog.howto")}
     </a>
     <a
-      href="https://github.com/AnushkaKRajasingha/demo-conceptboard"
+      href="https://github.com/AnushkaKRajasingha/demo-conceptboard/issues"
       target="_blank"
       rel="noopener noreferrer"
     >

@@ -612,7 +612,7 @@ class App extends React.Component<ExcalidrawProps, AppState> {
           window.history.replaceState({}, "Excalidraw", window.location.origin);
         }
       } else {
-
+        // https://github.com/AnushkaKRajasingha/demo-conceptboard/issues/1919
         if (document.hidden) {
           window.addEventListener("focus", () => this.initializeScene(), {
             once: true,

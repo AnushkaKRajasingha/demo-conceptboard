@@ -234,7 +234,7 @@ const RE_RTL_CHECK = new RegExp(`^[^${RS_LTR_CHARS}]*[${RS_RTL_CHARS}]`);
  * Checks whether first directional character is RTL. Meaning whether it starts
  *  with RTL characters, or indeterminate (numbers etc.) characters followed by
  *  RTL.
- * See https://github.com/AnushkaKRajasingha/demo-conceptboard
+ * See https://github.com/AnushkaKRajasingha/demo-conceptboard/pull/1722#discussion_r436340171
  */
 export const isRTL = (text: string) => {
   return RE_RTL_CHECK.test(text);
