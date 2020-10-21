@@ -69,3 +69,38 @@ describe("element binding", () => {
 
       // NOTE this mouse down/up + await needs to be done in order to repro
       //  the issue, due to https://github.com/AnushkaKRajasingha/demo-conceptboard
+      mouse.reset();
+      expect(h.state.editingLinearElement).not.toBe(null);
+      mouse.down(0, 0);
+      await new Promise((r) => setTimeout(r, 100));
+      expect(h.state.editingLinearElement).toBe(null);
+      expect(API.getSelectedElement().type).toBe("rectangle");
+      mouse.up();
+      expect(API.getSelectedElement().type).toBe("rectangle");
+    },
+  );
+
+  it("should bind/unbind arrow when moving it with keyboard", () => {
+    const rectangle = UI.createElement("rectangle", {
+      x: 75,
+      y: 0,
+      size: 100,
+    });
+
+    // Creates arrow 1px away from bidding with rectangle
+    const arrow = UI.createElement("arrow", {
+      x: 0,
+      y: 0,
+      size: 50,
+    });
+
+    expect(arrow.endBinding).toBe(null);
+
+    expect(API.getSelectedElement().type).toBe("arrow");
+    Keyboard.hotkeyPress("ARROW_RIGHT");
+    expect(arrow.endBinding?.elementId).toBe(rectangle.id);
+
+    Keyboard.hotkeyPress("ARROW_LEFT");
+    expect(arrow.endBinding).toBe(null);
+  });
+});

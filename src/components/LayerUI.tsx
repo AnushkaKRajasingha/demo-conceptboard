@@ -368,4 +368,276 @@ const LayerUI = ({
       })}
     >
       {/* the zIndex ensures this menu has higher stacking order,
-         see https://github.com/AnushkaKRajasingha/demo-conceptboard
+         */}
+      <Island padding={2} style={{ zIndex: 1 }}>
+        <Stack.Col gap={4}>
+          <Stack.Row gap={1} justifyContent="space-between">
+            {actionManager.renderAction("loadScene")}
+            {actionManager.renderAction("saveScene")}
+            {actionManager.renderAction("saveAsScene")}
+            {renderExportDialog()}
+            {actionManager.renderAction("clearCanvas")}
+            <RoomDialog
+              isCollaborating={appState.isCollaborating}
+              collaboratorCount={appState.collaborators.size}
+              username={appState.username}
+              onUsernameChange={onUsernameChange}
+              onRoomCreate={onRoomCreate}
+              onRoomDestroy={onRoomDestroy}
+              setErrorMessage={(message: string) =>
+                setAppState({ errorMessage: message })
+              }
+            />
+          </Stack.Row>
+          <BackgroundPickerAndDarkModeToggle
+            actionManager={actionManager}
+            appState={appState}
+            setAppState={setAppState}
+          />
+        </Stack.Col>
+      </Island>
+    </Section>
+  );
+
+  const renderSelectedShapeActions = () => (
+    <Section
+      heading="selectedShapeActions"
+      className={clsx("zen-mode-transition", {
+        "transition-left": zenModeEnabled,
+      })}
+    >
+      <Island className={CLASSES.SHAPE_ACTIONS_MENU} padding={2}>
+        <SelectedShapeActions
+          appState={appState}
+          elements={elements}
+          renderAction={actionManager.renderAction}
+          elementType={appState.elementType}
+        />
+      </Island>
+    </Section>
+  );
+
+  const closeLibrary = useCallback(
+    (event) => {
+      setAppState({ isLibraryOpen: false });
+    },
+    [setAppState],
+  );
+
+  const deselectItems = useCallback(() => {
+    setAppState({
+      selectedElementIds: {},
+      selectedGroupIds: {},
+    });
+  }, [setAppState]);
+
+  const libraryMenu = appState.isLibraryOpen ? (
+    <LibraryMenu
+      pendingElements={getSelectedElements(elements, appState)}
+      onClickOutside={closeLibrary}
+      onInsertShape={onInsertShape}
+      onAddToLibrary={deselectItems}
+      setAppState={setAppState}
+    />
+  ) : null;
+
+  const renderFixedSideContainer = () => {
+    const shouldRenderSelectedShapeActions = showSelectedShapeActions(
+      appState,
+      elements,
+    );
+
+    return (
+      <FixedSideContainer side="top">
+        <div className="App-menu App-menu_top">
+          <Stack.Col
+            gap={4}
+            className={clsx({ "disable-pointerEvents": zenModeEnabled })}
+          >
+            {renderCanvasActions()}
+            {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
+          </Stack.Col>
+          <Section heading="shapes">
+            {(heading) => (
+              <Stack.Col gap={4} align="start">
+                <Stack.Row gap={1}>
+                  <Island
+                    padding={1}
+                    className={clsx({ "zen-mode": zenModeEnabled })}
+                  >
+                    <HintViewer appState={appState} elements={elements} />
+                    {heading}
+                    <Stack.Row gap={1}>
+                      <ShapesSwitcher
+                        elementType={appState.elementType}
+                        setAppState={setAppState}
+                        isLibraryOpen={appState.isLibraryOpen}
+                      />
+                    </Stack.Row>
+                  </Island>
+                  <LockIcon
+                    zenModeEnabled={zenModeEnabled}
+                    checked={appState.elementLocked}
+                    onChange={onLockToggle}
+                    title={t("toolBar.lock")}
+                  />
+                </Stack.Row>
+                {libraryMenu}
+              </Stack.Col>
+            )}
+          </Section>
+          <UserList
+            className={clsx("zen-mode-transition", {
+              "transition-right": zenModeEnabled,
+            })}
+          >
+            {Array.from(appState.collaborators)
+              // Collaborator is either not initialized or is actually the current user.
+              .filter(([_, client]) => Object.keys(client).length !== 0)
+              .map(([clientId, client]) => (
+                <Tooltip
+                  label={client.username || "Unknown user"}
+                  key={clientId}
+                >
+                  {actionManager.renderAction("goToCollaborator", clientId)}
+                </Tooltip>
+              ))}
+          </UserList>
+        </div>
+      </FixedSideContainer>
+    );
+  };
+
+  const renderBottomAppMenu = () => {
+    return (
+      <div
+        className={clsx("App-menu App-menu_bottom zen-mode-transition", {
+          "App-menu_bottom--transition-left": zenModeEnabled,
+        })}
+      >
+        <Stack.Col gap={2}>
+          <Section heading="canvasActions">
+            <Island padding={1}>
+              <ZoomActions
+                renderAction={actionManager.renderAction}
+                zoom={appState.zoom}
+              />
+            </Island>
+            {renderEncryptedIcon()}
+          </Section>
+        </Stack.Col>
+      </div>
+    );
+  };
+
+  const renderFooter = () => (
+    <footer role="contentinfo" className="layer-ui__wrapper__footer">
+      <div
+        className={clsx("zen-mode-transition", {
+          "transition-right disable-pointerEvents": zenModeEnabled,
+        })}
+      >
+        <LanguageList
+          onChange={async (lng) => {
+            await setLanguage(lng);
+            setAppState({});
+          }}
+          languages={languages}
+          floating
+        />
+        {actionManager.renderAction("toggleShortcuts")}
+      </div>
+      <button
+        className={clsx("disable-zen-mode", {
+          "disable-zen-mode--visible": zenModeEnabled,
+        })}
+        onClick={toggleZenMode}
+      >
+        {t("buttons.exitZenMode")}
+      </button>
+      {appState.scrolledOutside && (
+        <button
+          className="scroll-back-to-content"
+          onClick={() => {
+            setAppState({
+              ...calculateScrollCenter(elements, appState, canvas),
+            });
+          }}
+        >
+          {t("buttons.scrollBackToContent")}
+        </button>
+      )}
+    </footer>
+  );
+
+  return isMobile ? (
+    <MobileMenu
+      appState={appState}
+      elements={elements}
+      actionManager={actionManager}
+      libraryMenu={libraryMenu}
+      exportButton={renderExportDialog()}
+      setAppState={setAppState}
+      onUsernameChange={onUsernameChange}
+      onRoomCreate={onRoomCreate}
+      onRoomDestroy={onRoomDestroy}
+      onLockToggle={onLockToggle}
+      canvas={canvas}
+    />
+  ) : (
+    <div className="layer-ui__wrapper">
+      {appState.isLoading && <LoadingMessage />}
+      {appState.errorMessage && (
+        <ErrorDialog
+          message={appState.errorMessage}
+          onClose={() => setAppState({ errorMessage: null })}
+        />
+      )}
+      {appState.showShortcutsDialog && (
+        <ShortcutsDialog
+          onClose={() => setAppState({ showShortcutsDialog: false })}
+        />
+      )}
+      {renderFixedSideContainer()}
+      {renderBottomAppMenu()}
+      {
+        <aside
+          className={clsx(
+            "layer-ui__wrapper__github-corner zen-mode-transition",
+            {
+              "transition-right": zenModeEnabled,
+            },
+          )}
+        >
+          <GitHubCorner appearance={appState.appearance} />
+        </aside>
+      }
+      {renderFooter()}
+    </div>
+  );
+};
+
+const areEqual = (prev: LayerUIProps, next: LayerUIProps) => {
+  const getNecessaryObj = (appState: AppState): Partial<AppState> => {
+    const {
+      cursorX,
+      cursorY,
+      suggestedBindings,
+      startBoundElement: boundElement,
+      ...ret
+    } = appState;
+    return ret;
+  };
+  const prevAppState = getNecessaryObj(prev.appState);
+  const nextAppState = getNecessaryObj(next.appState);
+
+  const keys = Object.keys(prevAppState) as (keyof Partial<AppState>)[];
+
+  return (
+    prev.lng === next.lng &&
+    prev.elements === next.elements &&
+    keys.every((key) => prevAppState[key] === nextAppState[key])
+  );
+};
+
+export default React.memo(LayerUI, areEqual);

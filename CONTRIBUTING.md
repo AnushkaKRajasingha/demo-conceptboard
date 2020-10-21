@@ -12,4 +12,8 @@
 > pull requests from branches on your fork. To do this, run:
 >
 > ```sh
-> git remote add upstream https://github.com/AnushkaKRajasingha/demo-conceptboard
+> git remote add upstream https://github.com/AnushkaKRajasingha/demo-conceptboard.git
+> git fetch upstream
+> git branch --set-upstream-to=upstream/master master
+> ```
+

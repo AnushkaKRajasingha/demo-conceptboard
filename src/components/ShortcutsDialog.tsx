@@ -104,4 +104,210 @@ const Footer = () => (
       {t("shortcutsDialog.howto")}
     </a>
     <a
-      href="https://github.com/AnushkaKRajasingha/demo-conceptboard
+      href="https://github.com/AnushkaKRajasingha/demo-conceptboard"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t("shortcutsDialog.github")}
+    </a>
+  </div>
+);
+
+export const ShortcutsDialog = ({ onClose }: { onClose?: () => void }) => {
+  const handleClose = React.useCallback(() => {
+    if (onClose) {
+      onClose();
+    }
+  }, [onClose]);
+
+  return (
+    <>
+      <Dialog
+        maxWidth={900}
+        onCloseRequest={handleClose}
+        title={t("shortcutsDialog.title")}
+      >
+        <Columns>
+          <Column>
+            <ShortcutIsland caption={t("shortcutsDialog.shapes")}>
+              <Shortcut label={t("toolBar.selection")} shortcuts={["V", "1"]} />
+              <Shortcut label={t("toolBar.rectangle")} shortcuts={["R", "2"]} />
+              <Shortcut label={t("toolBar.diamond")} shortcuts={["D", "3"]} />
+              <Shortcut label={t("toolBar.ellipse")} shortcuts={["E", "4"]} />
+              <Shortcut label={t("toolBar.arrow")} shortcuts={["A", "5"]} />
+              <Shortcut label={t("toolBar.line")} shortcuts={["P", "6"]} />
+              <Shortcut
+                label={t("toolBar.draw")}
+                shortcuts={["Shift+P", "7"]}
+              />
+              <Shortcut label={t("toolBar.text")} shortcuts={["T", "8"]} />
+              <Shortcut
+                label={t("shortcutsDialog.textNewLine")}
+                shortcuts={[
+                  getShortcutKey("Enter"),
+                  getShortcutKey("Shift+Enter"),
+                ]}
+              />
+              <Shortcut
+                label={t("shortcutsDialog.textFinish")}
+                shortcuts={[
+                  getShortcutKey("Esc"),
+                  getShortcutKey("CtrlOrCmd+Enter"),
+                ]}
+              />
+              <Shortcut
+                label={t("shortcutsDialog.curvedArrow")}
+                shortcuts={[
+                  "A",
+                  t("shortcutsDialog.click"),
+                  t("shortcutsDialog.click"),
+                  t("shortcutsDialog.click"),
+                ]}
+                isOr={false}
+              />
+              <Shortcut
+                label={t("shortcutsDialog.curvedLine")}
+                shortcuts={[
+                  "L",
+                  t("shortcutsDialog.click"),
+                  t("shortcutsDialog.click"),
+                  t("shortcutsDialog.click"),
+                ]}
+                isOr={false}
+              />
+              <Shortcut label={t("toolBar.lock")} shortcuts={["Q"]} />
+              <Shortcut
+                label={t("shortcutsDialog.preventBinding")}
+                shortcuts={[getShortcutKey("CtrlOrCmd")]}
+              />
+            </ShortcutIsland>
+            <ShortcutIsland caption={t("shortcutsDialog.view")}>
+              <Shortcut
+                label={t("buttons.zoomIn")}
+                shortcuts={[getShortcutKey("CtrlOrCmd++")]}
+              />
+              <Shortcut
+                label={t("buttons.zoomOut")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+-")]}
+              />
+              <Shortcut
+                label={t("buttons.resetZoom")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+0")]}
+              />
+              <Shortcut
+                label={t("shortcutsDialog.zoomToFit")}
+                shortcuts={["Shift+1"]}
+              />
+              <Shortcut
+                label={t("buttons.toggleFullScreen")}
+                shortcuts={["F"]}
+              />
+              <Shortcut
+                label={t("buttons.toggleZenMode")}
+                shortcuts={[getShortcutKey("Alt+Z")]}
+              />
+              <Shortcut
+                label={t("labels.toggleGridMode")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+'")]}
+              />
+            </ShortcutIsland>
+          </Column>
+          <Column>
+            <ShortcutIsland caption={t("shortcutsDialog.editor")}>
+              <Shortcut
+                label={t("labels.selectAll")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+A")]}
+              />
+              <Shortcut
+                label={t("labels.multiSelect")}
+                shortcuts={[
+                  getShortcutKey(`Shift+${t("shortcutsDialog.click")}`),
+                ]}
+              />
+              <Shortcut
+                label={t("labels.moveCanvas")}
+                shortcuts={[
+                  getShortcutKey(`Space+${t("shortcutsDialog.drag")}`),
+                  getShortcutKey(`Wheel+${t("shortcutsDialog.drag")}`),
+                ]}
+                isOr={true}
+              />
+              <Shortcut
+                label={t("labels.copy")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+C")]}
+              />
+              <Shortcut
+                label={t("labels.paste")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+V")]}
+              />
+              <Shortcut
+                label={t("labels.copyAsPng")}
+                shortcuts={[getShortcutKey("Shift+Alt+C")]}
+              />
+              <Shortcut
+                label={t("labels.copyStyles")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+Alt+C")]}
+              />
+              <Shortcut
+                label={t("labels.pasteStyles")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+Alt+V")]}
+              />
+              <Shortcut
+                label={t("labels.delete")}
+                shortcuts={[getShortcutKey("Del")]}
+              />
+              <Shortcut
+                label={t("labels.sendToBack")}
+                shortcuts={[
+                  isDarwin
+                    ? getShortcutKey("CtrlOrCmd+Alt+[")
+                    : getShortcutKey("CtrlOrCmd+Shift+["),
+                ]}
+              />
+              <Shortcut
+                label={t("labels.bringToFront")}
+                shortcuts={[
+                  isDarwin
+                    ? getShortcutKey("CtrlOrCmd+Alt+]")
+                    : getShortcutKey("CtrlOrCmd+Shift+]"),
+                ]}
+              />
+              <Shortcut
+                label={t("labels.sendBackward")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+[")]}
+              />
+              <Shortcut
+                label={t("labels.bringForward")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+]")]}
+              />
+              <Shortcut
+                label={t("labels.duplicateSelection")}
+                shortcuts={[
+                  getShortcutKey("CtrlOrCmd+D"),
+                  getShortcutKey(`Alt+${t("shortcutsDialog.drag")}`),
+                ]}
+              />
+              <Shortcut
+                label={t("buttons.undo")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+Z")]}
+              />
+              <Shortcut
+                label={t("buttons.redo")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+Shift+Z")]}
+              />
+              <Shortcut
+                label={t("labels.group")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+G")]}
+              />
+              <Shortcut
+                label={t("labels.ungroup")}
+                shortcuts={[getShortcutKey("CtrlOrCmd+Shift+G")]}
+              />
+            </ShortcutIsland>
+          </Column>
+        </Columns>
+        <Footer />
+      </Dialog>
+    </>
+  );
+};
